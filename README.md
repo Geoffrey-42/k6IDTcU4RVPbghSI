@@ -28,4 +28,4 @@ The models resulted in 73% accuracy to predict customer satisfaction.
 
 ## Conclusion
 This sentiment analysis permitted to summarize customer's feedback and predict whether they were satisfied based on their answers.
-The relevant criteria for customer satisfaction were identified, allowing to identify areas for improvement.
+The relevant criteria for customer satisfaction were identified.
