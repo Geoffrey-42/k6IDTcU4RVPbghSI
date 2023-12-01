@@ -1,4 +1,4 @@
-path = 'C:/Users/Maison/Documents/Apziva/Happy Customers/Happy_Repo/data/raw/'
+path = ''
 poll = pd.read_csv(path+"ACME-HappinessSurvey2020.csv")
 
 print('\nThe 5 first poll answers are:\n')
