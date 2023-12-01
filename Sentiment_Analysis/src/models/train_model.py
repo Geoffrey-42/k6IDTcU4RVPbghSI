@@ -1,14 +1,28 @@
+### An XGBoost model will be tuned and fitted to the data
+
 ### Training with XGBoost. Hyperparameter tuning
 
-def objective(trial): # The objective to maximize in the optuna study
+def objective(trial): 
+    '''
+    Defines an objective for a hyperparameter search with Optuna.
+    
+    Arguments:
+        trial: The current trial in the optuna search
+    
+    Returns:
+        score: Float, score for this trial
+    '''
+    # The objective to maximize in the optuna study
     n_estimators = trial.suggest_int("n_estimators", 1, 50)
     learning_rate = trial.suggest_float("learning_rate", 0.01, 0.1, log=True)
     max_depth = trial.suggest_int("max_depth", 1, 5)
     _XGB_model = XGBClassifier(objective = 'binary:logistic', eval_metric = 'error', learning_rate = learning_rate,
                                max_depth = max_depth, n_estimators = n_estimators, random_state = 0)
     _XGB_model.fit(X_train, y_train)
-    return _XGB_model.score(X_test, y_test)
+    score = _XGB_model.score(X_test, y_test)
+    return score
 
+## Create an optuna study and perform a hyperparameter search
 sampler = TPESampler(seed=0)
 study = optuna.create_study(direction="maximize", sampler=sampler)
 study.optimize(objective, n_trials=50)
@@ -24,7 +38,6 @@ for key, value in trial.params.items():
 learning_rate = trial.params['learning_rate']
 max_depth = trial.params['max_depth']
 n_estimators = trial.params['n_estimators']
-
 ## End of hyperparameter tuning
 
 ### Training
@@ -40,7 +53,9 @@ XGB_model.fit(X_train, y_train)
 y_hat = XGB_model.predict(X_test)
 print('\nThe XGB_model score on the test set is: ', XGB_model.score(X_test, y_test))
 print(classification_report(y_test, y_hat))
+# XGBoost had been trained and tested
 
+## Feature Extraction
 print('\nImportance of each feature using this XGB_model:\n')
 selector = RFECV(XGB_model, step=1, cv=5, min_features_to_select = 1)
 
@@ -50,6 +65,7 @@ for j in range(X.shape[1]):
 for j in range(X.shape[1]):
     print(f'Rank of variable X{j+1}: ', selector.ranking_[j])
 
+## Testing the model on extracted features
 X_train_reduced = X_train[['X1', 'X3']]
 XGB_model.fit(X_train_reduced, y_train)
 y_hat = XGB_model.predict(X_test[['X1', 'X3']])
