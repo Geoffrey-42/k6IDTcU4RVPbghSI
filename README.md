@@ -5,15 +5,15 @@ This project helped businesses gain insights into customer satisfaction and iden
 The goal of this project is to conduct sentiment analysis based on customer reviews. 
 
 ## Dataset
-An excel sheet contains the results of a poll in which each column is the answer to a specify question, such as:
+An excel sheet contains the results of a poll in which each column is the answer to a specify question:
 
-Was my order delivered delivered on time ? (score 1-5)
-
-Contents of my order was as I expected (score 1-5) 
-
-I paid a good price for my order (score 1-5) 
-
-etc
+Y: Binary target variable; 0 meaning an unsatisfied and 1 meaning a satisfied customer
+X1: Was my order was delivered on time ? (score 1-5)
+X2: Contents of my order was as I expected (score 1-5)
+X3: I ordered everything I wanted to order (score 1-5)
+X4: I paid a good price for my order (score 1-5)
+X5: I am satisfied with my courier (score 1-5)
+X6: The app makes ordering easy for me (score 1-5)
 
 ## Methodology
 This sentiment analysis problem was treated as a logistic regression problem in which the input is the client's feedback and the output is a binary variable determining whether the client was satisfied.
