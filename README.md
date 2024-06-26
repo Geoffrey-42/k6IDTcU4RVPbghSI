@@ -1,4 +1,4 @@
-# Sentiment analysis
+# Customer Satisfaction Prediction and Survey Analysis
 This project helped businesses gain insights into customer satisfaction and identify areas for improvement.
 
 ## Objective
